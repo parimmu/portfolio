@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 
 function Dropdown() {
   const [isOpen, setIsOpen] = useState(false);
-  const sections = ['About', 'Experience', 'Projects', 'Resume', 'Contact'];
+  // Define sections with their paths for React Router
+  const sections = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Experience', path: '/experience' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Resume', path: '/resume' },
+    { name: 'Contact', path: '/contact' }
+  ];
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -21,10 +30,10 @@ function Dropdown() {
       {isOpen && (
         <ul id="dropdown-menu" className="dropdown-menu">
           {sections.map((section) => (
-            <li key={section.toLowerCase()}>
-              <a href={} onClick={() => setIsOpen(false)}>
-                {section}
-              </a>
+            <li key={section.name.toLowerCase()}>
+              <Link to={section.path} onClick={() => setIsOpen(false)}>
+                {section.name}
+              </Link>
             </li>
           ))}
         </ul>
