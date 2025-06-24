@@ -1,14 +1,45 @@
 import React from 'react';
-import Dropdown from './Dropdown.jsx'; // Import the Dropdown component
-// If you have global styles you want App.jsx to control, import style.css here
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dropdown from './Dropdown.jsx'; // Navigation component
+import HomePage from './pages/HomePage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import ExperiencePage from './pages/ExperiencePage.jsx';
+import ProjectsPage from './pages/ProjectsPage.jsx';
+import ResumePage from './pages/ResumePage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
+
+// We might want to import global styles here too
 // import '../style.css'; // Assuming style.css is in the root
 
 function App() {
   return (
-    <div className="App">
-      <Dropdown /> {/* Render the Dropdown component */}
-      {/* The rest of your page content (sections) will eventually go here, managed by React or remain static HTML */}
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header>
+          {/* You might want to move the Dropdown into a dedicated Header component later */}
+          <Dropdown />
+          <h1>My Portfolio</h1> {/* This h1 was in index.html header, moving it here for now */}
+        </header>
+
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/experience" element={<ExperiencePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/resume" element={<ResumePage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            {/* You can add a 404 Not Found route here later if needed */}
+            {/* <Route path="*" element={<NotFoundPage />} /> */}
+          </Routes>
+        </main>
+
+        {/* Footer can also be part of this main layout */}
+        <footer>
+          <p>&copy; 2023 My Portfolio</p> {/* This was in index.html footer */}
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
 
